@@ -1,0 +1,26 @@
+spring:
+  # html页面刷新
+  thymeleaf:
+    cache: false
+  #和  test 复用
+  profiles:
+    active: test
+
+mybatis-plus:
+  mapper-locations: mapper/*.xml
+  configuration:
+    #驼峰映射
+    map-underscore-to-camel-case: true
+  #取别名
+  type-aliases-package: com.dj.xk.pojo
+
+#打印sql日志
+logging:
+  level:
+    com.dj.xk: debug
+
+#开启swagger
+swagger:
+  enabled: true
+
+

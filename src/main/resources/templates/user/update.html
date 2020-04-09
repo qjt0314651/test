@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="../js/jquery-1.12.4.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>修改用户</title>
+</head>
+<body>
+<form id="frm">
+    <input type="hidden" name="id" th:value="${user.id}"><br/>
+    用户名：<input type="text" name="name" th:value="${user.name}"><br/>
+    密码： <input type="password" name="pwd" th:value="${user.pwd}" ><br/>
+    <input type="button" value="add" onclick="upd()">
+</form>
+</body>
+<script type="text/javascript">
+    function upd(){
+        $.post(
+            "/user/update",
+            $("#frm").serialize(),
+            function (data) {
+                if(data.code ==200){
+                    window.location.href="/user/toShow";
+                }
+                else{
+                    alert(data.msg);
+                }
+            }
+        );
+    }
+</script>
+</html>

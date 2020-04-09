@@ -1,0 +1,13 @@
+spring:
+
+  # 数据库连接  4个
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/mp?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+    driverClassName: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+
+server:
+  port: 8080
+
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="../js/jquery-1.12.4.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>注册用户</title>
+</head>
+<body>
+<form id="frm">
+    用户名：<input type="text" name="name"><br/>
+    密码： <input type="password" name="pwd"><br/>
+    <input type="button" value="add" onclick="add()">
+</form>
+</body>
+<script type="text/javascript">
+    function add(){
+        $.post(
+            "/user/add",
+            $("#frm").serialize(),
+            function (data) {
+                if(data.code ==200){
+                    window.location.href="/user/toShow";
+                }
+                else{
+                    alert(data.msg);
+                }
+            }
+        );
+    }
+</script>
+</html>

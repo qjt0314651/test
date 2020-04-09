@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="../js/jquery-1.12.4.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="frm">
+<input type="hidden" name="pageNo" value="1" id="pageNow" >
+</form>
+<table width="100%" border="1" cellspacing="1" cellpadding="0">
+    <tr>
+        <td>id</td>
+        <td>用户名</td>
+        <td>密码</td>
+        <td>操作</td>
+    </tr>
+   <tbody id="tb">
+   </tbody>
+</table>
+<div id="order" align="center"></div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        sea();
+    })
+    function sea() {
+        $.post(
+            "/user/show",
+            $("#frm").serialize(),
+            function (data) {
+                var html = "";
+                var pag = "";
+                var single = data.data.userList;
+                var num = data.data.pages;
+                for (var i =0 ; i<single.length; i++){
+                    html +="<tr>";
+                    html +="<td>"+single[i].id+"</td>";
+                    html +="<td>"+single[i].name+"</td>";
+                    html +="<td>"+single[i].pwd+"</td>";
+                    html += "<td><input type='button' value='删除' onclick='del("+single[i].id+")'>";
+                    html += "<input type='button' value='修改' onclick='upd("+single[i].id+")'></td>";
+                    html +="</tr>";
+                }
+                $("#tb").html(html);
+                var page = $("#pageNow").val();
+                pag += '<input type="button" value="上一页" onclick="chang('+(parseInt(page)-1)+','+num+')"/>';
+                pag += '<input type="button" value="下一页" id="next" onclick="chang('+(parseInt(page)+1)+','+num+')"/>';
+                $("#order").html(pag);
+            }
+        );
+    }
+
+    /* 分页 */
+    function chang(page, pages){
+        debugger;
+        $("#pageNow").val(page);
+        if(page<1){
+            alert("至少一頁");
+        }
+        if((page-1)*2 > pages){
+           alert("當前為最後一頁")
+            return;
+        }
+        sea();
+    }
+    function upd(id) {
+        window.location.href="/user/toUpdate?id=" +id
+    }
+
+
+    function del(id) {
+        $.post(
+            "/user/del/"+ id,
+           {},
+            function (data) {
+                window.location.reload();
+            }
+    )}
+</script>
+</html>
