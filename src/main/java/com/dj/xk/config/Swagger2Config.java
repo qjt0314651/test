@@ -39,10 +39,10 @@ public class Swagger2Config {
 
         private ApiInfo apiInfo() {
             return new ApiInfoBuilder()
-                    .title("点金教育Swaggerdemo")
-                    .description("点金教育")
+                    .title("Swaggerdemo")
+                    .description("a")
                     // 作者信息
-                    .contact(new Contact("Liuyl", "https://www.dianit.cn", "liuyl_super@163.com"))
+                    .contact(new Contact("qjt", "https://www.baidu.cn", "qjt0314651@163.com"))
                     .version("1.0.0")
                     .build();
         }
